@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+      android:id="@+id/chart_nav_inf"
+      android:icon="@drawable/ic_home_black_24dp"
+      android:title="Infectii" />
+
+  <item
+      android:id="@+id/chart_nav_vindecari"
+      android:icon="@drawable/ic_home_black_24dp"
+      android:title="Vindecari" />
+  <item
+      android:id="@+id/chart_nav_decese"
+      android:icon="@drawable/ic_home_black_24dp"
+      android:title="Infectii" />
+
+
+</menu>
