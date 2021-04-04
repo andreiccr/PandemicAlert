@@ -139,6 +139,14 @@ namespace PandemicAlert
 
         }
 
+        protected async override void OnResume()
+        {
+            base.OnResume();
+            Log.Debug("TAGTAG", "OnResume()");
+            await dataService.UpdateData();
+            UpdateUI();
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
