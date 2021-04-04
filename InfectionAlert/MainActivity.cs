@@ -24,6 +24,8 @@ using OxyPlot.Xamarin.Android;
 using OxyPlot.Axes;
 using OxyPlot;
 using OxyPlot.Series;
+using PandemicAlert.Alert;
+using Firebase.Messaging;
 
 namespace PandemicAlert
 {
@@ -35,6 +37,7 @@ namespace PandemicAlert
         IDataService dataService;
         DataCompute compute;
         StatusContainer statusContainer;
+        AlertBuilder alert;
 
         /* Status panel views */
         TextView msg_infections, msg_healratio, msg_activeinfections, msg_dangerpercentage;
@@ -53,10 +56,14 @@ namespace PandemicAlert
             dataService = new DataService();
             statusContainer = new StatusContainer(this);
             compute = new DataCompute();
-
+            alert = new AlertBuilder();
+            
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
+
+            alert.CreateChannel((NotificationManager)GetSystemService(Context.NotificationService));
+            FirebaseMessaging.Instance.SubscribeToTopic("general");
 
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
@@ -128,6 +135,16 @@ namespace PandemicAlert
                 Log.Debug("TAGTAG", "List key: " + day);
             }
 
+
+
+        }
+
+        protected async override void OnResume()
+        {
+            base.OnResume();
+            Log.Debug("TAGTAG", "OnResume()");
+            await dataService.UpdateData();
+            UpdateUI();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
