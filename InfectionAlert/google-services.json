@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "105527297552",
+    "project_id": "pandemicalert-a9fd6",
+    "storage_bucket": "pandemicalert-a9fd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105527297552:android:412fa450e53b15fadaac95",
+        "android_client_info": {
+          "package_name": "com.ciucur.pandemicalert.covid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105527297552-3ssi5rcl4trv21glknjejan63tc6msqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUYZwK9E34rHp-fM1j3dYLI3Gb-HDTj84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105527297552-3ssi5rcl4trv21glknjejan63tc6msqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
