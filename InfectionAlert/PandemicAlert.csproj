@@ -74,7 +74,7 @@
     <Compile Include="ExtensiveDataActivity.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="Models\Vaccines.cs" />
-    <Compile Include="StatusContainer.cs" />
+    <Compile Include="ViewUpdater.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Models\CovidData.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

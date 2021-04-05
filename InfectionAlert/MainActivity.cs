@@ -36,15 +36,15 @@ namespace PandemicAlert
 
         IDataService dataService;
         DataCompute compute;
-        StatusContainer statusContainer;
+        ViewUpdater viewUpdater;
         AlertBuilder alert;
 
-        /* Status panel views */
-        TextView msg_infections, msg_healratio, msg_activeinfections, msg_dangerpercentage;
-        ImageView image_infections, image_healratio, image_activeinfections, image_dangerpercentage;
+        // Status panel views
+        TextView msg_infection_trend, msg_heal_infection_trend, msg_active_cases, msg_danger_percentage;
+        ImageView image_infection_trend, image_heal_infection_trend, image_active_infections, image_danger_percentage;
         GridLayout subcontainer_status;
 
-        /* Data panel views */
+        // Data panel views
         GridLayout subcontainer_data;
         TextView msg_last_update;
         TextView msg_infections_today, msg_healed_today;
@@ -54,7 +54,7 @@ namespace PandemicAlert
         protected async override void OnCreate(Bundle savedInstanceState)
         {
             dataService = new DataService();
-            statusContainer = new StatusContainer(this);
+            viewUpdater = new ViewUpdater((Context)this);
             compute = new DataCompute();
             alert = new AlertBuilder();
             
@@ -71,14 +71,14 @@ namespace PandemicAlert
             var toolbar = FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            msg_infections = FindViewById<TextView>(Resource.Id.message_infections);
-            msg_healratio = FindViewById<TextView>(Resource.Id.message_healratio);
-            msg_activeinfections = FindViewById<TextView>(Resource.Id.message_activecases);
-            msg_dangerpercentage = FindViewById<TextView>(Resource.Id.message_dangerpercentage);
-            image_infections = FindViewById<ImageView>(Resource.Id.image_infections);
-            image_healratio = FindViewById<ImageView>(Resource.Id.image_healratio);
-            image_activeinfections = FindViewById<ImageView>(Resource.Id.image_activecases);
-            image_dangerpercentage = FindViewById<ImageView>(Resource.Id.image_dangerpercentage);
+            msg_infection_trend = FindViewById<TextView>(Resource.Id.msg_infection_trend);
+            msg_heal_infection_trend = FindViewById<TextView>(Resource.Id.msg_heal_infection_trend);
+            msg_active_cases = FindViewById<TextView>(Resource.Id.msg_active_cases);
+            msg_danger_percentage = FindViewById<TextView>(Resource.Id.msg_danger_percentage);
+            image_infection_trend = FindViewById<ImageView>(Resource.Id.image_infection_trend);
+            image_heal_infection_trend = FindViewById<ImageView>(Resource.Id.image_heal_infection_trend);
+            image_active_infections = FindViewById<ImageView>(Resource.Id.image_active_cases);
+            image_danger_percentage = FindViewById<ImageView>(Resource.Id.image_danger_percentage);
             subcontainer_status = FindViewById<GridLayout>(Resource.Id.subcontainer_status);
             subcontainer_data = FindViewById<GridLayout>(Resource.Id.subcontainer_data);
 
@@ -90,52 +90,30 @@ namespace PandemicAlert
             msg_projected_vaccination = FindViewById<TextView>(Resource.Id.msg_projected_vaccination);
 
 
-            //Initialize StatusContainer views
-            statusContainer.SetInfectionStatusView(msg_infections, image_infections);
-            statusContainer.UpdateInfectionStatusView(InfectionStatus.NoData);
-            statusContainer.SetHealedStatusView(msg_healratio, image_healratio);
-            statusContainer.UpdateHealingStatusView(HealingStatus.NoData);
-            statusContainer.SetActiveInfectionsView(msg_activeinfections);
-            statusContainer.UpdateActiveInfectionsView(-1);
-            statusContainer.SetDangerPercentageView(msg_dangerpercentage);
-            statusContainer.UpdateDangerPercentageView(-1, -1);
-            statusContainer.SetLastUpdatedView(msg_last_update);
-            statusContainer.UpdateLastUpdatedView(null);
-
-            statusContainer.SetInfectedTodayView(msg_infections_today);
-            statusContainer.UpdateInfectedTodayView(-1);
-            statusContainer.SetHealedTodayView(msg_healed_today);
-            statusContainer.UpdateHealedTodayView(-1);
-
-            statusContainer.SetImmunizedPercentageView(msg_immune_percentage);
-            statusContainer.UpdateImmunizedPercentageView(-1);
-
-            statusContainer.SetProjectedDateImmunizedView(msg_projected_immunity);
-            statusContainer.UpdateProjectedDateImmunizedView(null);
-            statusContainer.SetProjectedDateVaccinatedView(msg_projected_vaccination);
-            statusContainer.UpdateProjectedDateVaccinatedView(null);
+            //Initialize ViewUpdater views
+            viewUpdater.InfectionTrend(msg_infection_trend, image_infection_trend);
+            viewUpdater.HealInfectionTrend(msg_heal_infection_trend, image_heal_infection_trend);
+            viewUpdater.ActiveInfections(msg_active_cases);
+            viewUpdater.DangerPercentage(msg_danger_percentage);
+            viewUpdater.LastUpdated(msg_last_update);
+            viewUpdater.InfectedToday(msg_infections_today);
+            viewUpdater.HealedToday(msg_healed_today);
+            viewUpdater.ImmunizedPercentage(msg_immune_percentage);
+            viewUpdater.ProjectedDateImmunized(msg_projected_immunity);
+            viewUpdater.ProjectedDateVaccinated(msg_projected_vaccination);
 
             Log.Debug("TAGTAG", "This is a log");
-
-            await dataService.ClearData();
 
             try
             {
                 await dataService.LoadData();
+                UpdateUI();
             }
             catch(Exception)
             {
                 Toast.MakeText(this, "Eroare: Nu s-au putut încărca datele", ToastLength.Short).Show();
+                msg_last_update.Text = "Eroare: Nu s-au putut încărca datele";
             }
-
-            UpdateUI();
-
-            foreach(DateTime day in dataService.Infections.Keys.ToList())
-            {
-                Log.Debug("TAGTAG", "List key: " + day);
-            }
-
-
 
         }
 
@@ -143,8 +121,16 @@ namespace PandemicAlert
         {
             base.OnResume();
             Log.Debug("TAGTAG", "OnResume()");
-            await dataService.UpdateData();
-            UpdateUI();
+            try
+            {
+                await dataService.UpdateData();
+                UpdateUI();
+            }
+            catch (Exception)
+            {
+                Log.Debug("TAGTAG", "OnResume(): Updating data failed");
+            }
+            
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -203,7 +189,6 @@ namespace PandemicAlert
                     }
                     catch (Exception)
                     {
-                        Toast.MakeText(this, "Eroare: Datele nu au putut fi șterse", ToastLength.Short).Show();
                         return;
                     }
 
@@ -230,11 +215,6 @@ namespace PandemicAlert
 
             }
 
-            foreach (DateTime day in dataService.Infections.Keys.ToList())
-            {
-                Log.Debug("TAGTAG", "List key: " + day);
-            }
-
             UpdateUI();
         }
 
@@ -247,6 +227,9 @@ namespace PandemicAlert
 
         void UpdateUI()
         {
+            if (dataService.Infections == null || dataService.Infections.Count == 0)
+                return;
+
             Log.Debug("TAGTAG", "UpdateUI(): Loading data to compute...");
             compute.Load(dataService.Infections, dataService.Healed, dataService.Deaths, dataService.Vaccines);
 
@@ -254,18 +237,18 @@ namespace PandemicAlert
             compute.ComputeAll();
 
             Log.Debug("TAGTAG", "UpdateUI(): Updating views...");
-            statusContainer.UpdateInfectionStatusView(compute.InfectionTrend);
-            statusContainer.UpdateHealingStatusView(compute.HealingTrend);
-            statusContainer.UpdateActiveInfectionsView(compute.ActiveInfections);
-            statusContainer.UpdateDangerPercentageView(20, (int)(compute.DeathPercentage*100));
+            viewUpdater.UpdateInfectionTrend(compute.InfectionTrend);
+            viewUpdater.UpdateHealInfectionTrend(compute.HealingTrend);
+            viewUpdater.UpdateActiveInfections(compute.ActiveInfections);
+            viewUpdater.UpdateDangerPercentage(19.0, Math.Round(compute.DeathPercentage*100,2));
 
-            statusContainer.UpdateLastUpdatedView(dataService.Infections.Keys.Max());
-            statusContainer.UpdateInfectedTodayView(compute.GetInfectedDay(dataService.Infections.Keys.Max()));
-            statusContainer.UpdateHealedTodayView(compute.GetHealedDay(dataService.Healed.Keys.Max()));
+            viewUpdater.UpdateLastUpdated(dataService.Infections.Keys.Max());
+            viewUpdater.UpdateInfectedToday(compute.GetInfectedDay(dataService.Infections.Keys.Max()));
+            viewUpdater.UpdateHealedToday(compute.GetHealedDay(dataService.Healed.Keys.Max()));
 
-            statusContainer.UpdateImmunizedPercentageView(compute.GetImmunized());
-            statusContainer.UpdateProjectedDateImmunizedView(compute.ProjectImmunizationDate(0.7));
-            statusContainer.UpdateProjectedDateVaccinatedView(compute.ProjectVaccinationDate(0.7));
+            viewUpdater.UpdateImmunizedPercentage(Math.Round(compute.GetImmunized(true, true), 2));
+            viewUpdater.UpdateProjectedDateImmunized(compute.ProjectImmunizationDate(0.7));
+            viewUpdater.UpdateProjectedDateVaccinated(compute.ProjectVaccinationDate(0.7));
         }
 
         

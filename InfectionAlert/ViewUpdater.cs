@@ -14,90 +14,102 @@ using System.Text;
 
 namespace PandemicAlert
 {
-    class StatusContainer
+    class ViewUpdater
     {
-        TextView msgInfectionStatus;
-        TextView msgHealedStatus;
-        TextView msgActiveInfections;
-        TextView msgDangerPercentage;
-
-        ImageView imageInfectionStatus;
-        ImageView imageHealedStatus;
-
-        TextView msgLastUpdate;
-        TextView msgInfectedToday, msgHealedToday;
-        TextView msgImmunizedPercentage;
+        TextView msgInfectionTrend, msgHealInfectionTrend, msgActiveInfections, msgDangerPercentage;
+        ImageView imageInfectionTrend, imageHealInfectionTrend;
+        TextView msgLastUpdate, msgInfectedToday, msgHealedToday, msgImmunizedPercentage;
         TextView msgProjectedDateImmunized, msgProjectedDateVaccinated;
 
-        //Context Context;
+        Context context;
 
-        public StatusContainer(Context context)
+        public ViewUpdater(Context context)
         {
-            //this.Context = context;
+            this.context = context;
         }
 
-        public void SetInfectionStatusView(TextView textView, ImageView imageView)
+
+        public void InfectionTrend(TextView textView, ImageView imageView, InfectionStatus trend=InfectionStatus.NoData)
         {
-            this.msgInfectionStatus = textView;
-            this.imageInfectionStatus = imageView;
+            this.msgInfectionTrend = textView;
+            this.imageInfectionTrend = imageView;
+
+            UpdateInfectionTrend(trend);
         }
 
-        public void SetHealedStatusView(TextView textView, ImageView imageView)
+        public void HealInfectionTrend(TextView textView, ImageView imageView, HealingStatus trend=HealingStatus.NoData)
         {
-            this.msgHealedStatus = textView;
-            this.imageHealedStatus = imageView;
+            this.msgHealInfectionTrend = textView;
+            this.imageHealInfectionTrend = imageView;
+
+            UpdateHealInfectionTrend(trend);
         }
 
-        public void SetActiveInfectionsView(TextView textView)
+        public void ActiveInfections(TextView textView, long value=-1)
         {
             this.msgActiveInfections = textView;
+
+            UpdateActiveInfections(value);
         }
 
-        public void SetDangerPercentageView(TextView textView)
+        public void DangerPercentage(TextView textView, double valueSeverity = -1, double valueDeath = -1)
         {
             this.msgDangerPercentage = textView;
+
+            UpdateDangerPercentage(valueSeverity, valueDeath);
         }
 
-        public void SetLastUpdatedView(TextView textView)
+        public void LastUpdated(TextView textView, DateTime? dateTime = null)
         {
             this.msgLastUpdate = textView;
+
+            UpdateLastUpdated(dateTime);
         }
 
-        public void SetInfectedTodayView(TextView textView)
+        public void InfectedToday(TextView textView, long value = -1)
         {
             this.msgInfectedToday = textView;
+
+            UpdateInfectedToday(value);
         }
 
-        public void SetHealedTodayView(TextView textView)
+        public void HealedToday(TextView textView, long value = -1)
         {
             this.msgHealedToday = textView;
+
+            UpdateHealedToday(value);
         }
 
-        public void SetImmunizedPercentageView(TextView textView)
+        public void ImmunizedPercentage(TextView textView, double value = -1)
         {
             this.msgImmunizedPercentage = textView;
+
+            UpdateImmunizedPercentage(value);
         }
 
-        public void SetProjectedDateImmunizedView(TextView textView)
+        public void ProjectedDateImmunized(TextView textView, DateTime? dateTime = null)
         {
             this.msgProjectedDateImmunized = textView;
+
+            UpdateProjectedDateImmunized(dateTime);
         }
 
-        public void SetProjectedDateVaccinatedView(TextView textView)
+        public void ProjectedDateVaccinated(TextView textView, DateTime? dateTime = null)
         {
             this.msgProjectedDateVaccinated = textView;
+
+            UpdateProjectedDateVaccinated(dateTime);
         }
 
-        public void UpdateProjectedDateImmunizedView(DateTime? date)
+        public void UpdateProjectedDateImmunized(DateTime? date)
         {
             if (date == null)
             {
-                //this.msgProjectedDateImmunized.Text = this.Context.GetString(Resource.String.no_data);
-                this.msgProjectedDateImmunized.Text = "Nu sunt date";
+                this.msgProjectedDateImmunized.Text = this.context.GetString(Resource.String.no_data);
                 return;
             }
             
-            string msg = "Vor fi imunizați 70% din populație pe:\n" + ((DateTime)date).Date.ToString("dd-MMMM-yyyy");
+            string msg = "Vor fi imunizați 70% din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
             SpannableString spannable = new SpannableString(msg);
 
             spannable.SetSpan(new ForegroundColorSpan(Color.BlueViolet), msg.IndexOf(":") + 1, msg.Length, SpanTypes.ExclusiveExclusive);
@@ -107,16 +119,15 @@ namespace PandemicAlert
 
         }
 
-        public void UpdateProjectedDateVaccinatedView(DateTime? date)
+        public void UpdateProjectedDateVaccinated(DateTime? date)
         {
             if (date == null)
             {
-                //this.msgProjectedDateVaccinated.Text = this.Context.GetString(Resource.String.no_data);
-                this.msgProjectedDateVaccinated.Text = "Nu sunt date";
+                this.msgProjectedDateVaccinated.Text = this.context.GetString(Resource.String.no_data);
                 return;
             }
 
-            string msg = "Vor fi vaccinați 70% din populație pe:\n" + ((DateTime)date).Date.ToString("dd-MMMM-yyyy");
+            string msg = "Vor fi vaccinați 70% din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
             SpannableString spannable = new SpannableString(msg);
 
             spannable.SetSpan(new ForegroundColorSpan(Color.BlueViolet), msg.IndexOf(":") + 1, msg.Length, SpanTypes.ExclusiveExclusive);
@@ -125,16 +136,15 @@ namespace PandemicAlert
 
         }
 
-        public void UpdateImmunizedPercentageView(double percentage)
+        public void UpdateImmunizedPercentage(double percentage)
         {
             if (percentage == -1)
             {
-                //this.msgImmunizedPercentage.Text = this.Context.GetString(Resource.String.no_data);
-                this.msgImmunizedPercentage.Text = "Nu sunt date";
+                this.msgImmunizedPercentage.Text = this.context.GetString(Resource.String.no_data);
                 return;
             }
 
-            string msg = "Imunizați: " + Math.Round(percentage*100).ToString() +  "%  Ținta: 50%-70%" ;
+            string msg = "Imunizați: " + Math.Round(percentage*100).ToString() +  "%  Ținta: 70%" ;
             SpannableString spannable = new SpannableString(msg);
 
             spannable.SetSpan(new ForegroundColorSpan(Color.Blue), msg.IndexOf(":") + 1, msg.IndexOf("Ținta")-1, SpanTypes.ExclusiveExclusive);
@@ -144,12 +154,11 @@ namespace PandemicAlert
 
         }
 
-        public void UpdateInfectedTodayView(long infectionNumber)
+        public void UpdateInfectedToday(long infectionNumber)
         {
             if(infectionNumber == -1)
             {
-                //this.msgInfectedToday.Text = this.Context.GetString(Resource.String.no_data);
-                this.msgInfectedToday.Text = "Nu sunt date";
+                this.msgInfectedToday.Text = this.context.GetString(Resource.String.no_data);
                 return;
             }
 
@@ -162,12 +171,11 @@ namespace PandemicAlert
 
         }
 
-        public void UpdateHealedTodayView(long healNumber)
+        public void UpdateHealedToday(long healNumber)
         {
             if (healNumber == -1)
             {
-                //this.msgHealedToday.Text = this.Context.GetString(Resource.String.no_data);
-                this.msgHealedToday.Text = "Nu sunt date";
+                this.msgHealedToday.Text = this.context.GetString(Resource.String.no_data);
                 return;
             }
 
@@ -180,7 +188,7 @@ namespace PandemicAlert
 
         }
 
-        public void UpdateLastUpdatedView(DateTime? dateTime)
+        public void UpdateLastUpdated(DateTime? dateTime)
         {
             if (dateTime == null)
             {
@@ -188,14 +196,12 @@ namespace PandemicAlert
                 return;
             }
                 
-
-            DateTime dateTime1 = (DateTime)dateTime;
-            this.msgLastUpdate.Text = "Ultima actualizare: " + dateTime1.ToString("dd-MMMM-yyyy");
+            this.msgLastUpdate.Text = "Ultima actualizare: " + dateTime?.ToString("dd-MMMM-yyyy");
         }
 
 
 
-        public void UpdateInfectionStatusView(InfectionStatus status)
+        public void UpdateInfectionTrend(InfectionStatus status)
         {
             string msg;
             Color color;
@@ -206,25 +212,24 @@ namespace PandemicAlert
                     msg = "Numărul de infectări este în CREȘTERE";
                     color = Color.Red;
 
-                    this.imageInfectionStatus.SetImageResource(Resource.Drawable.arrow_up3);
+                    this.imageInfectionTrend.SetImageResource(Resource.Drawable.arrow_up3);
                     break;
 
                 case InfectionStatus.Decreasing:
                     msg = "Numărul de infectări este în SCĂDERE";
                     color = Color.Blue;
 
-                    this.imageInfectionStatus.SetImageResource(Resource.Drawable.arrow_down3);
+                    this.imageInfectionTrend.SetImageResource(Resource.Drawable.arrow_down3);
                     break;
 
                 case InfectionStatus.Constant:
-                    this.msgInfectionStatus.Text = "Numărul de infectări a rămas la fel";
-                    this.imageInfectionStatus.SetImageResource(Resource.Drawable.unchanged);
+                    this.msgInfectionTrend.Text = "Numărul de infectări a rămas la fel";
+                    this.imageInfectionTrend.SetImageResource(Resource.Drawable.unchanged);
                     return;
 
                 default:
-                    //this.msgInfectionStatus.Text = this.Context.GetString(Resource.String.no_data);
-                    this.msgInfectionStatus.Text = "Nu sunt date";
-                    this.imageInfectionStatus.SetImageResource(Resource.Drawable.unchanged);
+                    this.msgInfectionTrend.Text = this.context.GetString(Resource.String.no_data);
+                    this.imageInfectionTrend.SetImageResource(Resource.Drawable.unchanged);
                     return;
             }
 
@@ -233,11 +238,11 @@ namespace PandemicAlert
 
             spannable.SetSpan(new ForegroundColorSpan(color), msg.IndexOf(SeparatorStr) + SeparatorStr.Length, msg.Length, SpanTypes.ExclusiveExclusive);
 
-            this.msgInfectionStatus.TextFormatted = spannable;
+            this.msgInfectionTrend.TextFormatted = spannable;
         }
 
 
-        public void UpdateHealingStatusView(HealingStatus status)
+        public void UpdateHealInfectionTrend(HealingStatus status)
         {
             string msg;
 
@@ -252,12 +257,11 @@ namespace PandemicAlert
                     break;
 
                 case HealingStatus.Constant:
-                    this.msgHealedStatus.Text = "Se infectează și se vindecă în aceeași masură";
+                    this.msgHealInfectionTrend.Text = "Se infectează și se vindecă în aceeași masură";
                     return;
 
                 default:
-                    //this.msgHealedStatus.Text = this.Context.GetString(Resource.String.no_data);
-                    this.msgHealedStatus.Text = "Nu sunt date";
+                    this.msgHealInfectionTrend.Text = this.context.GetString(Resource.String.no_data);
                     return;
             }
 
@@ -268,15 +272,14 @@ namespace PandemicAlert
             spannable.SetSpan(new ForegroundColorSpan(Color.Red), msg.ToLower().IndexOf(RedStr), msg.ToLower().IndexOf(RedStr) + RedStr.Length, SpanTypes.ExclusiveExclusive);
             spannable.SetSpan(new ForegroundColorSpan(Color.Blue), msg.ToLower().IndexOf(BlueStr), msg.ToLower().IndexOf(BlueStr) + BlueStr.Length, SpanTypes.ExclusiveExclusive);
 
-            this.msgHealedStatus.TextFormatted = spannable;
+            this.msgHealInfectionTrend.TextFormatted = spannable;
         }
 
-        public void UpdateActiveInfectionsView(long number)
+        public void UpdateActiveInfections(long number)
         {
             if(number < 0)
             {
-                //this.msgActiveInfections.Text = this.Context.GetString(Resource.String.no_data);
-                this.msgActiveInfections.Text = "Nu sunt date";
+                this.msgActiveInfections.Text = this.context.GetString(Resource.String.no_data);
                 return;
             }
 
@@ -288,12 +291,11 @@ namespace PandemicAlert
             this.msgActiveInfections.TextFormatted = spannable;
         }
 
-        public void UpdateDangerPercentageView(int severePercent, int deathPercent)
+        public void UpdateDangerPercentage(double severePercent, double deathPercent)
         {
             if (severePercent < 0 || deathPercent < 0)
             {
-                //this.msgDangerPercentage.Text = this.Context.GetString(Resource.String.no_data);
-                this.msgDangerPercentage.Text = "Nu sunt date";
+                this.msgDangerPercentage.Text = this.context.GetString(Resource.String.no_data);
                 return;
             }
 

@@ -3912,16 +3912,16 @@ namespace PandemicAlert
 			public const int image = 2131230846;
 			
 			// aapt resource value: 0x7F08007F
-			public const int image_activecases = 2131230847;
+			public const int image_active_cases = 2131230847;
 			
 			// aapt resource value: 0x7F080080
-			public const int image_dangerpercentage = 2131230848;
+			public const int image_danger_percentage = 2131230848;
 			
 			// aapt resource value: 0x7F080081
-			public const int image_healratio = 2131230849;
+			public const int image_heal_infection_trend = 2131230849;
 			
 			// aapt resource value: 0x7F080082
-			public const int image_infections = 2131230850;
+			public const int image_infection_trend = 2131230850;
 			
 			// aapt resource value: 0x7F080083
 			public const int info = 2131230851;
@@ -3974,32 +3974,32 @@ namespace PandemicAlert
 			// aapt resource value: 0x7F080093
 			public const int message = 2131230867;
 			
-			// aapt resource value: 0x7F080094
-			public const int message_activecases = 2131230868;
-			
-			// aapt resource value: 0x7F080095
-			public const int message_dangerpercentage = 2131230869;
-			
-			// aapt resource value: 0x7F080096
-			public const int message_healratio = 2131230870;
-			
-			// aapt resource value: 0x7F080097
-			public const int message_infections = 2131230871;
-			
 			// aapt resource value: 0x7F080003
 			public const int META = 2131230723;
 			
+			// aapt resource value: 0x7F080094
+			public const int middle = 2131230868;
+			
+			// aapt resource value: 0x7F080095
+			public const int mini = 2131230869;
+			
+			// aapt resource value: 0x7F080096
+			public const int msg_active_cases = 2131230870;
+			
+			// aapt resource value: 0x7F080097
+			public const int msg_danger_percentage = 2131230871;
+			
 			// aapt resource value: 0x7F080098
-			public const int middle = 2131230872;
+			public const int msg_heal_infection_trend = 2131230872;
 			
 			// aapt resource value: 0x7F080099
-			public const int mini = 2131230873;
+			public const int msg_icu_number = 2131230873;
 			
 			// aapt resource value: 0x7F08009A
-			public const int msg_icu_number = 2131230874;
+			public const int msg_immune_percentage = 2131230874;
 			
 			// aapt resource value: 0x7F08009B
-			public const int msg_immune_percentage = 2131230875;
+			public const int msg_infection_trend = 2131230875;
 			
 			// aapt resource value: 0x7F08009C
 			public const int msg_last_updated = 2131230876;

@@ -130,7 +130,7 @@
         <!-- Este numarul de infectari in crestere/scadere/constant -->
         <ImageView
             android:src="@drawable/unchanged"
-            android:id="@+id/image_infections"
+            android:id="@+id/image_infection_trend"
             android:layout_gravity="top|center_horizontal"
             android:layout_row="1"
             android:layout_column="1"
@@ -140,7 +140,7 @@
 
 
         <TextView
-            android:id="@+id/message_infections"
+            android:id="@+id/msg_infection_trend"
             android:text="@string/no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
         <!-- Se vindeca mai multi decat se imbolnavesc/se imbolnavesc mai multi decat se vindeca -->
         <ImageView
             android:src="@drawable/heal"
-            android:id="@+id/image_healratio"
+            android:id="@+id/image_heal_infection_trend"
             android:layout_gravity="top|center_horizontal"
             android:layout_row="4"
             android:layout_column="1"
@@ -175,7 +175,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/message_healratio"
+            android:id="@+id/msg_heal_infection_trend"
             android:text="@string/no_data"
             android:layout_gravity="top|center"
             android:layout_row="5"
@@ -197,7 +197,7 @@
         <!-- Numar infectati in acest moment -->
         <ImageView
             android:src="@drawable/unchanged"
-            android:id="@+id/image_activecases"
+            android:id="@+id/image_active_cases"
             android:layout_gravity="top|center_horizontal"
             android:layout_row="7"
             android:layout_column="1"
@@ -208,7 +208,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/message_activecases"
+            android:id="@+id/msg_active_cases"
             android:text="@string/no_data"
             android:layout_gravity="top|center"
             android:layout_row="8"
@@ -230,7 +230,7 @@
         <!-- Procentaj forme grave si decese la numarul de infectati -->
         <ImageView
             android:src="@drawable/unchanged"
-            android:id="@+id/image_dangerpercentage"
+            android:id="@+id/image_danger_percentage"
             android:layout_gravity="top|center_horizontal"
             android:layout_row="10"
             android:layout_column="1"
@@ -241,7 +241,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/message_dangerpercentage"
+            android:id="@+id/msg_danger_percentage"
             android:text="@string/no_data"
             android:layout_gravity="top|center"
             android:layout_row="11"
@@ -261,10 +261,5 @@
         android:background="?android:attr/windowBackground"
         android:layout_alignParentBottom="true"
         app:menu="@menu/navigation" />
-
-    <!--<android.webkit.WebView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gr_imun" />-->
 
 </RelativeLayout>
