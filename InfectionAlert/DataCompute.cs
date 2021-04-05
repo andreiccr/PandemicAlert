@@ -23,8 +23,6 @@ namespace PandemicAlert
         //Population size in 2020 according to UN Data
         const int POPULATION_SIZE = 19237691;
 
-        const int SAMPLE_SIZE = 7;
-
         public InfectionStatus InfectionTrend { get; private set; }
         public HealingStatus HealingTrend { get; private set; }
         public long ActiveInfections { get; private set; }
@@ -105,6 +103,17 @@ namespace PandemicAlert
             return healed[day.Date] - healed[day.AddDays(-1).Date];
         }
 
+        public long GetDeathsOnDay(DateTime day)
+        {
+            if (deaths.ContainsKey(day.Date) == false)
+                return -1;
+
+            if (deaths.ContainsKey(day.AddDays(-1).Date) == false)
+                return deaths.Values.Min();
+
+
+            return deaths[day.Date] - deaths[day.AddDays(-1).Date];
+        }
 
         double SevenDayAverageInfections(DateTime day)
         {
@@ -156,6 +165,31 @@ namespace PandemicAlert
             return (double)sum / (i + 1);
         }
 
+        double SevenDayAverageDeaths(DateTime day)
+        {
+            if (deaths.ContainsKey(day.AddDays(-7)) == false)
+            {
+                return -1;
+            }
+
+            var dayList = deaths.Keys.ToList();
+            dayList.Sort();
+            dayList.Reverse();
+
+            long sum = 0;
+            int i;
+
+            for (i = 0; i < 7; i++)
+            {
+                day = day.AddDays(-i);
+                if (deaths.ContainsKey(day) == false)
+                    break;
+                sum += GetDeathsOnDay(day);
+            }
+
+            return (double)sum / (i + 1);
+        }
+
         /// <summary>
         /// Get number of current cases
         /// </summary>
@@ -175,6 +209,35 @@ namespace PandemicAlert
             return ActiveInfections;
         }
 
+        public DeathTrends GetDeathTrend()
+        {
+            if (deaths == null || deaths.Count == 0)
+            {
+                return DeathTrends.NoData;
+            }
+
+            //List of dictionary keys in decreasing order
+            var dayList = deaths.Keys.ToList();
+            dayList.Sort();
+            dayList.Reverse();
+
+            double averageA, averageB;
+
+            averageB = SevenDayAverageDeaths(dayList[0]);
+            averageA = SevenDayAverageDeaths(dayList[7]);
+
+            int trend = 0;
+            if (averageA > averageB) trend = -1;
+            else if (averageA < averageB) trend = 1; //Increasing
+
+            Log.Debug("TAGTAG", "D Trend: " + averageA + " " + averageB);
+            DeathTrends deathTrends;
+            if (trend > 0) deathTrends = DeathTrends.Increasing;
+            else if (trend < 0) deathTrends = DeathTrends.Decreasing;
+            else deathTrends = DeathTrends.Constant;
+
+            return deathTrends;
+        }
 
         public InfectionStatus GetInfectionTrend()
         {
@@ -492,4 +555,13 @@ namespace PandemicAlert
         Moderna = 2,
         AstraZeneca, Vaxzevria = 3
     }
+
+
+    enum DeathTrends
+    {
+        NoData = -1,
+        Constant = 0,
+        Increasing = 1,
+        Decreasing = 2
+    };
 }

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Sars-COV-2</string>
-    <string name="title_home">Situatie</string>
-    <string name="title_dashboard">Date</string>
+  
+    <string name="nav_title_status">Situație Actuală</string>
+    <string name="nav_title_data">Alte Date</string>
+  
     <string name="no_data">Nu sunt date</string>
 </resources>

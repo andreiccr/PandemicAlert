@@ -57,6 +57,23 @@ namespace PandemicAlert
             Vaccines = new Dictionary<DateTime, Vaccines>();
         }
 
+        /// <summary>
+        /// Returns incidence in Bucharest. Will be replaced in the near future.
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete]
+        public double GetIncidenceInB()
+        {
+            GetDataOnline();
+            if (covidData == null || covidData.Json.Count == 0)
+            {
+                //Error
+                throw new Exception("CovidData: No data from remote source exists");
+            }
+
+            return double.Parse(covidData.Json["currentDayStats"]["incidence"]["B"].ToString());
+        }
+
         public async Task LoadData()
         {
             //If there is no data cached on the device or some data is missing, parse it from the online source

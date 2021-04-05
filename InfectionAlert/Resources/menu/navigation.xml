@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_status"
         android:icon="@drawable/baseline_highlight_24"
-        android:title="@string/title_home" />
+        android:title="@string/nav_title_status" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_data"
         android:icon="@drawable/baseline_notes_24"
-        android:title="@string/title_dashboard" />
+        android:title="@string/nav_title_data" />
 
 
 </menu>

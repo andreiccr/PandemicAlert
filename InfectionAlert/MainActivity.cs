@@ -41,7 +41,7 @@ namespace PandemicAlert
 
         // Status panel views
         TextView msg_infection_trend, msg_heal_infection_trend, msg_active_cases, msg_danger_percentage;
-        ImageView image_infection_trend, image_heal_infection_trend, image_active_infections, image_danger_percentage;
+        ImageView image_infection_trend, image_heal_infection_trend;
         ScrollView subcontainer_status;
 
         // Data panel views
@@ -50,6 +50,9 @@ namespace PandemicAlert
         TextView msg_infections_today, msg_healed_today;
         TextView msg_immune_percentage;
         TextView msg_projected_immunity, msg_projected_vaccination;
+        TextView msg_projected_immunity_half, msg_projected_vaccination_half;
+        TextView msg_projected_immunity_quarter, msg_projected_vaccination_quarter;
+        TextView msg_death_trend, msg_deaths_today, msg_incidence, msg_vaccination_rate;
 
         protected async override void OnCreate(Bundle savedInstanceState)
         {
@@ -77,8 +80,6 @@ namespace PandemicAlert
             msg_danger_percentage = FindViewById<TextView>(Resource.Id.msg_danger_percentage);
             image_infection_trend = FindViewById<ImageView>(Resource.Id.image_infection_trend);
             image_heal_infection_trend = FindViewById<ImageView>(Resource.Id.image_heal_infection_trend);
-            image_active_infections = FindViewById<ImageView>(Resource.Id.image_active_cases);
-            image_danger_percentage = FindViewById<ImageView>(Resource.Id.image_danger_percentage);
             subcontainer_status = FindViewById<ScrollView>(Resource.Id.subcontainer_status);
             subcontainer_data = FindViewById<ScrollView>(Resource.Id.subcontainer_data);
 
@@ -88,7 +89,14 @@ namespace PandemicAlert
             msg_immune_percentage = FindViewById<TextView>(Resource.Id.msg_immune_percentage);
             msg_projected_immunity = FindViewById<TextView>(Resource.Id.msg_projected_immunity);
             msg_projected_vaccination = FindViewById<TextView>(Resource.Id.msg_projected_vaccination);
-
+            msg_projected_immunity_half = FindViewById<TextView>(Resource.Id.msg_projected_immunity_half);
+            msg_projected_vaccination_half = FindViewById<TextView>(Resource.Id.msg_projected_vaccination_half);
+            msg_projected_immunity_quarter = FindViewById<TextView>(Resource.Id.msg_projected_immunity_quarter);
+            msg_projected_vaccination_quarter = FindViewById<TextView>(Resource.Id.msg_projected_vaccination_quarter);
+            msg_death_trend = FindViewById<TextView>(Resource.Id.msg_death_trend);
+            msg_deaths_today = FindViewById<TextView>(Resource.Id.msg_today_deaths);
+            msg_incidence = FindViewById<TextView>(Resource.Id.msg_incidence);
+            msg_vaccination_rate = FindViewById<TextView>(Resource.Id.msg_vaccination_rate);
 
             //Initialize ViewUpdater views
             viewUpdater.InfectionTrend(msg_infection_trend, image_infection_trend);
@@ -101,6 +109,14 @@ namespace PandemicAlert
             viewUpdater.ImmunizedPercentage(msg_immune_percentage);
             viewUpdater.ProjectedDateImmunized(msg_projected_immunity);
             viewUpdater.ProjectedDateVaccinated(msg_projected_vaccination);
+            viewUpdater.ProjectedDateImmunizedHalf(msg_projected_immunity_half);
+            viewUpdater.ProjectedDateVaccinatedHalf(msg_projected_vaccination_half);
+            viewUpdater.ProjectedDateImmunizedQuarter(msg_projected_immunity_quarter);
+            viewUpdater.ProjectedDateVaccinatedQuarter(msg_projected_vaccination_quarter);
+            viewUpdater.DeathTrend(msg_death_trend);
+            viewUpdater.DeathsToday(msg_deaths_today);
+            viewUpdater.Incidence(msg_incidence);
+            viewUpdater.VaccinationRate(msg_vaccination_rate);
 
             Log.Debug("TAGTAG", "This is a log");
 
@@ -144,12 +160,12 @@ namespace PandemicAlert
         {
             switch (item.ItemId)
             {
-                case Resource.Id.navigation_home:
+                case Resource.Id.navigation_status:
                     subcontainer_data.Visibility = ViewStates.Gone;
                     subcontainer_status.Visibility = ViewStates.Visible;
 
                     return true;
-                case Resource.Id.navigation_dashboard:
+                case Resource.Id.navigation_data:
                     subcontainer_status.Visibility = ViewStates.Gone;
                     subcontainer_data.Visibility = ViewStates.Visible;
 
@@ -249,6 +265,17 @@ namespace PandemicAlert
             viewUpdater.UpdateImmunizedPercentage(Math.Round(compute.GetImmunized(true, true), 2));
             viewUpdater.UpdateProjectedDateImmunized(compute.ProjectImmunizationDate(0.7));
             viewUpdater.UpdateProjectedDateVaccinated(compute.ProjectVaccinationDate(0.7));
+
+            viewUpdater.UpdateProjectedDateImmunizedHalf(compute.ProjectImmunizationDate(0.5));
+            viewUpdater.UpdateProjectedDateVaccinatedHalf(compute.ProjectVaccinationDate(0.5));
+
+            viewUpdater.UpdateProjectedDateImmunizedQuarter(compute.ProjectImmunizationDate(0.25));
+            viewUpdater.UpdateProjectedDateVaccinatedQuarter(compute.ProjectVaccinationDate(0.25));
+
+            viewUpdater.UpdateVaccinationRate(Math.Round(compute.GetImmunizationRate(false, true)));
+            viewUpdater.UpdateDeathsToday(compute.GetDeathsOnDay(dataService.Deaths.Keys.Max()));
+            viewUpdater.UpdateIncidence((new DataService()).GetIncidenceInB());
+            viewUpdater.UpdateDeathTrend(compute.GetDeathTrend());
         }
 
         

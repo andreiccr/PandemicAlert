@@ -98,8 +98,8 @@
                 android:visibility="visible"/>
 
             <TextView
-                android:text="Data estimata 70% imunizari: 01.09.2021"
-                android:id="@+id/msg_projected_immunity"
+                android:text="Astăzi au murit 0 oameni"
+                android:id="@+id/msg_today_deaths"
                 android:layout_row="6"
                 android:layout_column="1"
                 android:layout_margin="15dp"
@@ -111,9 +111,100 @@
                 android:visibility="visible"/>
 
             <TextView
-                android:text="Data estimata 70% vaccinari: 15.07.2021"
-                android:id="@+id/msg_projected_vaccination"
+                android:text="Mor mai puțini oameni din cauza COVID-19"
+                android:id="@+id/msg_death_trend"
                 android:layout_row="7"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
+
+            <TextView
+                android:text="Se vaccinează aproximativ 50000 oameni pe zi"
+                android:id="@+id/msg_vaccination_rate"
+                android:layout_row="8"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
+
+            <TextView
+                android:text="Rata de incidență este de 6,50 în București"
+                android:id="@+id/msg_incidence"
+                android:layout_row="9"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
+
+            <TextView
+                android:text="Data estimata 70% imunizari: 01.09.2021"
+                android:id="@+id/msg_projected_immunity"
+                android:layout_row="10"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
+
+            <TextView
+                android:text="Data estimata 70% imunizari: 01.09.2021"
+                android:id="@+id/msg_projected_immunity_half"
+                android:layout_row="11"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
+
+            <TextView
+                android:text="Data estimata 70% imunizari: 01.09.2021"
+                android:id="@+id/msg_projected_vaccination_half"
+                android:layout_row="12"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
+
+            <TextView
+                android:text="Data estimata 70% imunizari: 01.09.2021"
+                android:id="@+id/msg_projected_immunity_quarter"
+                android:layout_row="13"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
+
+            <TextView
+                android:text="Data estimata 70% imunizari: 01.09.2021"
+                android:id="@+id/msg_projected_vaccination_quarter"
+                android:layout_row="14"
                 android:layout_column="1"
                 android:layout_margin="15dp"
                 android:textSize="16dp"
@@ -220,7 +311,8 @@
                 android:layout_column="1"
                 android:layout_margin="5dp"
                 android:layout_width="48dp"
-                android:layout_height="48dp" />
+                android:layout_height="48dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -245,16 +337,6 @@
                 android:id="@+id/separator3" />
 
             <!-- Procentaj forme grave si decese la numarul de infectati -->
-            <ImageView
-                android:src="@drawable/unchanged"
-                android:id="@+id/image_danger_percentage"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_row="10"
-                android:layout_column="1"
-                android:layout_margin="5dp"
-                android:layout_width="48dp"
-                android:layout_height="48dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -266,6 +348,29 @@
                 android:textSize="16dp"
                 android:layout_margin="10dp"
                 android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_row="12"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/separator4" />
+
+            <TextView
+                android:text="Data estimata 70% vaccinari: 15.07.2021"
+                android:id="@+id/msg_projected_vaccination"
+                android:layout_row="13"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
 
         </GridLayout>
     </ScrollView>

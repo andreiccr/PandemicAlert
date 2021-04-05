@@ -20,6 +20,9 @@ namespace PandemicAlert
         ImageView imageInfectionTrend, imageHealInfectionTrend;
         TextView msgLastUpdate, msgInfectedToday, msgHealedToday, msgImmunizedPercentage;
         TextView msgProjectedDateImmunized, msgProjectedDateVaccinated;
+        TextView msgProjectedDateImmunizedHalf, msgProjectedDateVaccinatedHalf;
+        TextView msgProjectedDateImmunizedQuarter, msgProjectedDateVaccinatedQuarter;
+        TextView msgDeathsToday, msgDeathTrend, msgIncidence, msgVaccinationRate;
 
         Context context;
 
@@ -28,6 +31,33 @@ namespace PandemicAlert
             this.context = context;
         }
 
+        public void DeathsToday(TextView textView, long value = -1)
+        {
+            msgDeathsToday = textView;
+
+            UpdateDeathsToday(value);
+        }
+
+        public void DeathTrend(TextView textView, DeathTrends trend = DeathTrends.NoData)
+        {
+            msgDeathTrend = textView;
+
+            UpdateDeathTrend(trend);
+        }
+
+        public void Incidence(TextView textView, double value = -1)
+        {
+            msgIncidence = textView;
+
+            UpdateIncidence(value);
+        }
+
+        public void VaccinationRate(TextView textView, double value = -1)
+        {
+            msgVaccinationRate = textView;
+
+            UpdateVaccinationRate(value);
+        }
 
         public void InfectionTrend(TextView textView, ImageView imageView, InfectionStatus trend=InfectionStatus.NoData)
         {
@@ -101,6 +131,34 @@ namespace PandemicAlert
             UpdateProjectedDateVaccinated(dateTime);
         }
 
+        public void ProjectedDateImmunizedHalf(TextView textView, DateTime? dateTime = null)
+        {
+            this.msgProjectedDateImmunizedHalf = textView;
+
+            UpdateProjectedDateImmunizedHalf(dateTime);
+        }
+
+        public void ProjectedDateVaccinatedHalf(TextView textView, DateTime? dateTime = null)
+        {
+            this.msgProjectedDateVaccinatedHalf = textView;
+
+            UpdateProjectedDateVaccinatedHalf(dateTime);
+        }
+
+        public void ProjectedDateImmunizedQuarter(TextView textView, DateTime? dateTime = null)
+        {
+            this.msgProjectedDateImmunizedQuarter = textView;
+
+            UpdateProjectedDateImmunizedQuarter(dateTime);
+        }
+
+        public void ProjectedDateVaccinatedQuarter(TextView textView, DateTime? dateTime = null)
+        {
+            this.msgProjectedDateVaccinatedQuarter = textView;
+
+            UpdateProjectedDateVaccinatedQuarter(dateTime);
+        }
+
         public void UpdateProjectedDateImmunized(DateTime? date)
         {
             if (date == null)
@@ -109,13 +167,49 @@ namespace PandemicAlert
                 return;
             }
             
-            string msg = "Vor fi imunizați 70% din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
+            string msg = "Va fi imunizată 70% din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
             SpannableString spannable = new SpannableString(msg);
 
             spannable.SetSpan(new ForegroundColorSpan(Color.BlueViolet), msg.IndexOf(":") + 1, msg.Length, SpanTypes.ExclusiveExclusive);
-            spannable.SetSpan(new ForegroundColorSpan(Color.Black), msg.IndexOf("imunizați"), msg.IndexOf("imunizați") + "imunizați".Length, SpanTypes.ExclusiveExclusive);
+            spannable.SetSpan(new ForegroundColorSpan(Color.Black), msg.IndexOf("imunizată"), msg.IndexOf("imunizată") + "imunizată".Length, SpanTypes.ExclusiveExclusive);
 
             this.msgProjectedDateImmunized.TextFormatted = spannable;
+
+        }
+
+        public void UpdateProjectedDateImmunizedHalf(DateTime? date)
+        {
+            if (date == null)
+            {
+                this.msgProjectedDateImmunized.Text = this.context.GetString(Resource.String.no_data);
+                return;
+            }
+
+            string msg = "Va fi imunizată jumătate din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
+            SpannableString spannable = new SpannableString(msg);
+
+            spannable.SetSpan(new ForegroundColorSpan(Color.BlueViolet), msg.IndexOf(":") + 1, msg.Length, SpanTypes.ExclusiveExclusive);
+            spannable.SetSpan(new ForegroundColorSpan(Color.Black), msg.IndexOf("imunizată"), msg.IndexOf("imunizată") + "imunizată".Length, SpanTypes.ExclusiveExclusive);
+
+            this.msgProjectedDateImmunizedHalf.TextFormatted = spannable;
+
+        }
+
+        public void UpdateProjectedDateImmunizedQuarter(DateTime? date)
+        {
+            if (date == null)
+            {
+                this.msgProjectedDateImmunized.Text = this.context.GetString(Resource.String.no_data);
+                return;
+            }
+
+            string msg = "Va fi imunizată un sfert din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
+            SpannableString spannable = new SpannableString(msg);
+
+            spannable.SetSpan(new ForegroundColorSpan(Color.BlueViolet), msg.IndexOf(":") + 1, msg.Length, SpanTypes.ExclusiveExclusive);
+            spannable.SetSpan(new ForegroundColorSpan(Color.Black), msg.IndexOf("imunizată"), msg.IndexOf("imunizată") + "imunizată".Length, SpanTypes.ExclusiveExclusive);
+
+            this.msgProjectedDateImmunizedQuarter.TextFormatted = spannable;
 
         }
 
@@ -127,12 +221,46 @@ namespace PandemicAlert
                 return;
             }
 
-            string msg = "Vor fi vaccinați 70% din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
+            string msg = "Va fi vaccinată 70% din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
             SpannableString spannable = new SpannableString(msg);
 
             spannable.SetSpan(new ForegroundColorSpan(Color.BlueViolet), msg.IndexOf(":") + 1, msg.Length, SpanTypes.ExclusiveExclusive);
-            spannable.SetSpan(new ForegroundColorSpan(Color.Black), msg.IndexOf("vaccinați"), msg.IndexOf("vaccinați") + "vaccinați".Length, SpanTypes.ExclusiveExclusive);
+            spannable.SetSpan(new ForegroundColorSpan(Color.Black), msg.IndexOf("vaccinată"), msg.IndexOf("vaccinată") + "vaccinată".Length, SpanTypes.ExclusiveExclusive);
             this.msgProjectedDateVaccinated.TextFormatted = spannable;
+
+        }
+
+        public void UpdateProjectedDateVaccinatedHalf(DateTime? date)
+        {
+            if (date == null)
+            {
+                this.msgProjectedDateVaccinated.Text = this.context.GetString(Resource.String.no_data);
+                return;
+            }
+
+            string msg = "Va fi vaccinată jumătate din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
+            SpannableString spannable = new SpannableString(msg);
+
+            spannable.SetSpan(new ForegroundColorSpan(Color.BlueViolet), msg.IndexOf(":") + 1, msg.Length, SpanTypes.ExclusiveExclusive);
+            spannable.SetSpan(new ForegroundColorSpan(Color.Black), msg.IndexOf("vaccinată"), msg.IndexOf("vaccinată") + "vaccinată".Length, SpanTypes.ExclusiveExclusive);
+            this.msgProjectedDateVaccinatedHalf.TextFormatted = spannable;
+
+        }
+
+        public void UpdateProjectedDateVaccinatedQuarter(DateTime? date)
+        {
+            if (date == null)
+            {
+                this.msgProjectedDateVaccinated.Text = this.context.GetString(Resource.String.no_data);
+                return;
+            }
+
+            string msg = "Va fi vaccinată un sfert din populație pe:\n" + date?.Date.ToString("dd-MMMM-yyyy");
+            SpannableString spannable = new SpannableString(msg);
+
+            spannable.SetSpan(new ForegroundColorSpan(Color.BlueViolet), msg.IndexOf(":") + 1, msg.Length, SpanTypes.ExclusiveExclusive);
+            spannable.SetSpan(new ForegroundColorSpan(Color.Black), msg.IndexOf("vaccinată"), msg.IndexOf("vaccinată") + "vaccinată".Length, SpanTypes.ExclusiveExclusive);
+            this.msgProjectedDateVaccinatedQuarter.TextFormatted = spannable;
 
         }
 
@@ -311,5 +439,109 @@ namespace PandemicAlert
 
         }
 
+        public void UpdateDeathsToday(long value)
+        {
+            if (value < 0)
+            {
+                this.msgDeathsToday.Text = this.context.GetString(Resource.String.no_data);
+                return;
+            }
+
+            if(value == 0)
+            {
+                this.msgDeathsToday.Text = "Astăzi NU au murit oameni.";
+            }
+
+            string msg = "Astăzi au murit " + value + " oameni";
+
+            int indexOf1 = msg.IndexOf("%", 0), indexOf2 = msg.IndexOf("%", indexOf1 + 1);
+
+            SpannableString spannable = new SpannableString(msg);
+            spannable.SetSpan(new ForegroundColorSpan(Color.Red), msg.IndexOf("murit") + 5, msg.IndexOf("oameni") - 1 , SpanTypes.ExclusiveExclusive);
+
+            this.msgDeathsToday.TextFormatted = spannable;
+
+        }
+
+        public void UpdateIncidence(double value)
+        {
+            if (value < 0)
+            {
+                this.msgIncidence.Text = this.context.GetString(Resource.String.no_data);
+                return;
+            }
+
+            Color color;
+            if (value >= 4) color = Color.Red;
+            else if (value < 4 && value > 1.5) color = Color.Orange;
+            else color = Color.Blue;
+
+            string msg = "Rata de incidență este de " + value + " în București";
+
+            int indexOf1 = msg.IndexOf("%", 0), indexOf2 = msg.IndexOf("%", indexOf1 + 1);
+
+            SpannableString spannable = new SpannableString(msg);
+            spannable.SetSpan(new ForegroundColorSpan(color), msg.IndexOf("este de") + "este de".Length, msg.IndexOf("în") - 1, SpanTypes.ExclusiveExclusive);
+
+            this.msgIncidence.TextFormatted = spannable;
+
+        }
+
+
+        public void UpdateVaccinationRate(double value)
+        {
+            if (value < 0)
+            {
+                this.msgVaccinationRate.Text = this.context.GetString(Resource.String.no_data);
+                return;
+            }
+
+            string msg = "Se vaccinează aproximativ " + value + " oameni pe zi";
+
+            int indexOf1 = msg.IndexOf("%", 0), indexOf2 = msg.IndexOf("%", indexOf1 + 1);
+
+            SpannableString spannable = new SpannableString(msg);
+            spannable.SetSpan(new ForegroundColorSpan(Color.Blue), msg.IndexOf("aproximativ") + "aproximativ".Length, msg.IndexOf("oameni") - 1, SpanTypes.ExclusiveExclusive);
+
+            this.msgVaccinationRate.TextFormatted = spannable;
+
+        }
+
+        public void UpdateDeathTrend(DeathTrends value)
+        {
+            if (value < DeathTrends.NoData)
+            {
+                this.msgDeathTrend.Text = this.context.GetString(Resource.String.no_data);
+                return;
+            }
+
+            string msg;
+
+            switch (value)
+            {
+                case DeathTrends.Increasing:
+                    msg = "Mor mai mulți oameni din cauza COVID-19";
+                    break;
+
+                case DeathTrends.Decreasing:
+                    msg = "Mor mai puțini oameni din cauza COVID-19";
+                    break;
+
+                case DeathTrends.Constant:
+                    this.msgDeathTrend.Text = "Numărul de morți a rămas asemănător în ultima perioadă";
+                    return;
+
+                default:
+                    this.msgDeathTrend.Text = this.context.GetString(Resource.String.no_data);
+                    return;
+            }
+
+
+            SpannableString spannable = new SpannableString(msg);
+            //spannable.SetSpan(new ForegroundColorSpan(Color.Red), msg.IndexOf("murit") + 5, msg.IndexOf("oameni") - 1, SpanTypes.ExclusiveExclusive);
+
+            this.msgDeathTrend.TextFormatted = spannable;
+
+        }
     }
 }
