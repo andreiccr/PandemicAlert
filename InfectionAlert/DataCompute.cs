@@ -72,59 +72,39 @@ namespace PandemicAlert
             this.vaccines = vaccines;
         }
 
-
-        //Get number of new infections for a particular day
+        /// <summary>
+        /// Get number of new infections for a particular day
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public long GetInfectedDay(DateTime day)
         {
-            if (infections.ContainsKey(day) == false)
-                return 0;
+            if (infections.ContainsKey(day.Date) == false)
+                return -1;
             
-            if (infections.ContainsKey(day.AddDays(-1)) == false)
-                return infections[day] - infections.Values.Min();
+            if (infections.ContainsKey(day.AddDays(-1).Date) == false)
+                return infections.Values.Min();
 
-            return infections[day] - infections[day.AddDays(-1)];
+            return infections[day.Date] - infections[day.AddDays(-1).Date];
         }
 
-
-        //Get number of recovered patients for a particular day
+        /// <summary>
+        /// Get number of recovered patients for a particular day
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public long GetHealedDay(DateTime day)
         {
-            if (healed.ContainsKey(day) == false)
-                return 0;
+            if (healed.ContainsKey(day.Date) == false)
+                return -1;
 
-            if (healed.ContainsKey(day.AddDays(-1)) == false)
-                return healed[day] - healed.Values.Min();
+            if (healed.ContainsKey(day.AddDays(-1).Date) == false)
+                return healed.Values.Min();
 
 
-            return healed[day] - healed[day.AddDays(-1)];
+            return healed[day.Date] - healed[day.AddDays(-1).Date];
         }
 
-
-        //Returns the slope value of the regression line. Positive value indicate increasing line
-        double ComputeLinearRegression(List<long> xIndependent, List<long> yDependent)
-        {
-            Log.Debug("TAGTAG", "Computing linear regression");
-
-            long sumX = 0, sumY = 0, sumCoef = 0, sumXSqr = 0;
-            long n = xIndependent.LongCount();
-
-            sumX = xIndependent.Sum();
-            sumY = yDependent.Sum();
-
-            //Sum of x^2
-            foreach(long x in xIndependent)
-            {
-                sumXSqr += x * x;
-            }
-
-            //Sum of x*y
-            for(int i=0;i<xIndependent.Count;i++)
-            {
-                sumCoef += xIndependent[i] * yDependent[i];
-            }
-
-            return (double)(sumY * sumXSqr - sumX * sumCoef) / (n * sumXSqr - sumX * sumX);
-        }
 
         double SevenDayAverageInfections(DateTime day)
         {
@@ -176,7 +156,10 @@ namespace PandemicAlert
             return (double)sum / (i + 1);
         }
 
-
+        /// <summary>
+        /// Get number of current cases
+        /// </summary>
+        /// <returns></returns>
         public long GetActiveCases()
         {
             if(infections == null || infections.Count == 0)
@@ -205,19 +188,6 @@ namespace PandemicAlert
             var dayList = infections.Keys.ToList();
             dayList.Sort();
             dayList.Reverse();
-
-            //Create sample data
-            /*List<long> xValues = new List<long>();
-            List<long> yValues = new List<long>();
-            int n = Math.Min(7, infections.Count); //Sample size
-            for (int i=0; i<n; i++) {
-                xValues.Add(i);
-                yValues.Add(GetInfectedDay(dayList[i]));
-            }
-            yValues.Reverse();
-
-            double trend = ComputeLinearRegression(xValues, yValues);
-            */
 
             double averageA, averageB;
 
@@ -301,7 +271,14 @@ namespace PandemicAlert
             {
                 case VaccineType.All:
                     if (immunizedOnly)
-                        return this.vaccines[d].ImmunizedAll;
+                        {
+                            long sum = 0;
+                            foreach (var vax in this.vaccines)
+                            {
+                                sum += vax.Value.ImmunizedAll;
+                            }
+                            return sum;
+                        }
                     return this.vaccines[d].All;
 
                 case VaccineType.Pfizer:
@@ -386,17 +363,15 @@ namespace PandemicAlert
 
                     if(this.vaccines.ContainsKey(d.AddDays(-1).Date) == false)
                     {
-                        if (immunizedOnly)
-                            return this.vaccines[d].ImmunizedAll;
-                        else
+                        if (immunizedOnly == false)
                             return this.vaccines[d].All;
                     }
 
                     long number;
 
                     if (immunizedOnly)
-                        number = this.vaccines[d].ImmunizedAll - this.vaccines[d.AddDays(-1)].ImmunizedAll;
-                    else 
+                        number = this.vaccines[d].ImmunizedAll;
+                    else
                         number = this.vaccines[d].All - this.vaccines[d.AddDays(-1)].All;
 
                     return number;
@@ -426,9 +401,17 @@ namespace PandemicAlert
         public double GetImmunized(bool bothDosesOnly = false, bool excludeHealed = false)
         {
             long healed = (excludeHealed) ? 0 : this.healed[this.healed.Keys.Max()];
-            long vaccinated = (bothDosesOnly) ? this.vaccines[this.vaccines.Keys.Max()].ImmunizedAll : this.vaccines[this.vaccines.Keys.Max()].All;
+            long vaccinated = (bothDosesOnly) ? 0 : this.vaccines[this.vaccines.Keys.Max()].All;
 
-            return (double)(healed + vaccinated) / POPULATION_SIZE;
+            if(bothDosesOnly)
+            {
+                vaccinated = 0;
+                foreach(var vax in this.vaccines.Values) {
+                    vaccinated += vax.ImmunizedAll;
+                }
+            }
+
+            return ((double)(healed + vaccinated)) / (double)POPULATION_SIZE;
         }
 
         public double GetImmunizationRate(bool bothDosesOnly = false, bool excludeHealed = false)
@@ -455,7 +438,7 @@ namespace PandemicAlert
 
         public DateTime ProjectImmunizationDate(double targetPercentage)
         {
-            double immunizationRate = GetImmunizationRate();
+            double immunizationRate = GetImmunizationRate(true, true);
 
             double targetPopulation = POPULATION_SIZE * targetPercentage;
 

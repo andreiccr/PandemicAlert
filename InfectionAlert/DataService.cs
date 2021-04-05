@@ -88,6 +88,7 @@ namespace PandemicAlert
                 vac.ImmunizedModerna = long.Parse(covidData.Json["currentDayStats"]["vaccines"]["moderna"]["immunized"].ToString());
                 vac.Astra = long.Parse(covidData.Json["currentDayStats"]["vaccines"]["astra_zeneca"]["total_administered"].ToString());
                 vac.ImmunizedAstra = long.Parse(covidData.Json["currentDayStats"]["vaccines"]["astra_zeneca"]["immunized"].ToString());
+                vac.ImmunizedAll = vac.ImmunizedPfizer + vac.ImmunizedModerna + vac.ImmunizedAstra;
 
                 Vaccines.Add(currentDay.Date, vac);
 
@@ -108,6 +109,7 @@ namespace PandemicAlert
                     vac.ImmunizedModerna = long.Parse(covidData.Json["historicalData"][currentDay.Date.ToString("yyyy-MM-dd")]["vaccines"]["moderna"]["immunized"].ToString());
                     vac.Astra = long.Parse(covidData.Json["historicalData"][currentDay.Date.ToString("yyyy-MM-dd")]["vaccines"]["astra_zeneca"]["total_administered"].ToString());
                     vac.ImmunizedAstra = long.Parse(covidData.Json["historicalData"][currentDay.Date.ToString("yyyy-MM-dd")]["vaccines"]["astra_zeneca"]["immunized"].ToString());
+                    vac.ImmunizedAll = vac.ImmunizedPfizer + vac.ImmunizedModerna + vac.ImmunizedAstra;
 
                     Vaccines.Add(currentDay.Date, vac);
                 }
@@ -185,6 +187,7 @@ namespace PandemicAlert
                     vac.ImmunizedModerna = long.Parse(covidData.Json["currentDayStats"]["vaccines"]["moderna"]["immunized"].ToString());
                     vac.Astra = long.Parse(covidData.Json["currentDayStats"]["vaccines"]["astra_zeneca"]["total_administered"].ToString());
                     vac.ImmunizedAstra = long.Parse(covidData.Json["currentDayStats"]["vaccines"]["astra_zeneca"]["immunized"].ToString());
+                    vac.ImmunizedAll = vac.ImmunizedPfizer + vac.ImmunizedModerna + vac.ImmunizedAstra;
 
                     Vaccines.Add(d.Date, vac);
                 }
@@ -205,6 +208,7 @@ namespace PandemicAlert
                     vac.ImmunizedModerna = long.Parse(covidData.Json["historicalData"][d.Date.ToString("yyyy-MM-dd")]["vaccines"]["moderna"]["immunized"].ToString());
                     vac.Astra = long.Parse(covidData.Json["historicalData"][d.Date.ToString("yyyy-MM-dd")]["vaccines"]["astra_zeneca"]["total_administered"].ToString());
                     vac.ImmunizedAstra = long.Parse(covidData.Json["historicalData"][d.Date.ToString("yyyy-MM-dd")]["vaccines"]["astra_zeneca"]["immunized"].ToString());
+                    vac.ImmunizedAll = vac.ImmunizedPfizer + vac.ImmunizedModerna + vac.ImmunizedAstra;
 
                     Vaccines.Add(d.Date, vac);
 
