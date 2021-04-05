@@ -42,10 +42,10 @@ namespace PandemicAlert
         // Status panel views
         TextView msg_infection_trend, msg_heal_infection_trend, msg_active_cases, msg_danger_percentage;
         ImageView image_infection_trend, image_heal_infection_trend, image_active_infections, image_danger_percentage;
-        GridLayout subcontainer_status;
+        ScrollView subcontainer_status;
 
         // Data panel views
-        GridLayout subcontainer_data;
+        ScrollView subcontainer_data;
         TextView msg_last_update;
         TextView msg_infections_today, msg_healed_today;
         TextView msg_immune_percentage;
@@ -79,8 +79,8 @@ namespace PandemicAlert
             image_heal_infection_trend = FindViewById<ImageView>(Resource.Id.image_heal_infection_trend);
             image_active_infections = FindViewById<ImageView>(Resource.Id.image_active_cases);
             image_danger_percentage = FindViewById<ImageView>(Resource.Id.image_danger_percentage);
-            subcontainer_status = FindViewById<GridLayout>(Resource.Id.subcontainer_status);
-            subcontainer_data = FindViewById<GridLayout>(Resource.Id.subcontainer_data);
+            subcontainer_status = FindViewById<ScrollView>(Resource.Id.subcontainer_status);
+            subcontainer_data = FindViewById<ScrollView>(Resource.Id.subcontainer_data);
 
             msg_last_update = FindViewById<TextView>(Resource.Id.msg_last_updated);
             msg_infections_today = FindViewById<TextView>(Resource.Id.msg_today_infections);

@@ -17,240 +17,258 @@
         android:background="@color/colorPrimary"
     />
 
-    <GridLayout
+    <ScrollView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/subcontainer_data"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="?attr/actionBarSize"
         android:layout_marginTop="?attr/actionBarSize"
-        android:visibility="gone"
+        android:id="@+id/subcontainer_data" 
+        android:visibility="gone">
+    
+        <GridLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grid_layout_data"
         >
 
-        <TextView
-            android:text="Ultima actualizare: 29-03-2021"
-            android:id="@+id/msg_last_updated"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_margin="5dp"
-            android:textSize="12dp"
-            android:gravity="top|center"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:text="Ultima actualizare: 29-03-2021"
+                android:id="@+id/msg_last_updated"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:textSize="12dp"
+                android:gravity="top|center"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:text="Infectati astazi: 5.000"
-            android:id="@+id/msg_today_infections"
-            android:layout_row="2"
-            android:layout_column="1"
-            android:layout_margin="15dp"
-            android:textSize="16dp"
-            android:gravity="center|center_vertical"
-            android:layout_gravity="top|center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:text="Infectati astazi: 5.000"
+                android:id="@+id/msg_today_infections"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:gravity="center|center_vertical"
+                android:layout_gravity="top|center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:text="Vindecati astazi: 5.000"
-            android:id="@+id/msg_today_healed"
-            android:layout_row="3"
-            android:layout_column="1"
-            android:layout_margin="15dp"
-            android:textSize="16dp"
-            android:layout_gravity="top|center"
-            android:gravity="center|center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:text="Vindecati astazi: 5.000"
+                android:id="@+id/msg_today_healed"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:text="Pacienti ATI: 1400 din 1600 locuri"
-            android:id="@+id/msg_icu_number"
-            android:layout_row="4"
-            android:layout_column="1"
-            android:layout_margin="15dp"
-            android:textSize="16dp"
-            android:layout_gravity="top|center"
-            android:gravity="center|center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            <TextView
+                android:text="Pacienti ATI: 1400 din 1600 locuri"
+                android:id="@+id/msg_icu_number"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
-        <TextView
-            android:text="Imunizati: 10%  Tinta: 60%-70%"
-            android:id="@+id/msg_immune_percentage"
-            android:layout_row="5"
-            android:layout_column="1"
-            android:layout_margin="15dp"
-            android:textSize="16dp"
-            android:layout_gravity="top|center"
-            android:gravity="center|center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"/>
+            <TextView
+                android:text="Imunizati: 10%  Tinta: 60%-70%"
+                android:id="@+id/msg_immune_percentage"
+                android:layout_row="5"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
 
-        <TextView
-            android:text="Data estimata 70% imunizari: 01.09.2021"
-            android:id="@+id/msg_projected_immunity"
-            android:layout_row="6"
-            android:layout_column="1"
-            android:layout_margin="15dp"
-            android:textSize="16dp"
-            android:layout_gravity="top|center"
-            android:gravity="center|center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"/>
+            <TextView
+                android:text="Data estimata 70% imunizari: 01.09.2021"
+                android:id="@+id/msg_projected_immunity"
+                android:layout_row="6"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
 
-        <TextView
-            android:text="Data estimata 70% vaccinari: 15.07.2021"
-            android:id="@+id/msg_projected_vaccination"
-            android:layout_row="7"
-            android:layout_column="1"
-            android:layout_margin="15dp"
-            android:textSize="16dp"
-            android:layout_gravity="top|center"
-            android:gravity="center|center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"/>
+            <TextView
+                android:text="Data estimata 70% vaccinari: 15.07.2021"
+                android:id="@+id/msg_projected_vaccination"
+                android:layout_row="7"
+                android:layout_column="1"
+                android:layout_margin="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="top|center"
+                android:gravity="center|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"/>
         
-    </GridLayout>
-    <GridLayout
+        </GridLayout>
+    </ScrollView>
+
+    <ScrollView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/subcontainer_status"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="?attr/actionBarSize"
         android:layout_marginTop="?attr/actionBarSize"
+        android:id="@+id/subcontainer_status" 
         android:visibility="visible">
 
-        <!-- Este numarul de infectari in crestere/scadere/constant -->
-        <ImageView
-            android:src="@drawable/unchanged"
-            android:id="@+id/image_infection_trend"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_margin="5dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
-
-
-        <TextView
-            android:id="@+id/msg_infection_trend"
-            android:text="@string/no_data"
-            android:layout_width="wrap_content"
+        <GridLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|center"
-            android:layout_row="2"
-            android:layout_column="1"
-            android:textSize="16dp"
-            android:layout_margin="1dp" />
+            android:id="@+id/grid_layout_status"
+            >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:layout_row="3"
-            android:layout_column="1"
-            android:layout_margin="5dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/separator" />
+            <!-- Este numarul de infectari in crestere/scadere/constant -->
+            <ImageView
+                android:src="@drawable/unchanged"
+                android:id="@+id/image_infection_trend"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
 
 
-        <!-- Se vindeca mai multi decat se imbolnavesc/se imbolnavesc mai multi decat se vindeca -->
-        <ImageView
-            android:src="@drawable/heal"
-            android:id="@+id/image_heal_infection_trend"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_row="4"
-            android:layout_column="1"
-            android:layout_margin="5dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
+            <TextView
+                android:id="@+id/msg_infection_trend"
+                android:text="@string/no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:textSize="16dp"
+                android:layout_margin="1dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/msg_heal_infection_trend"
-            android:text="@string/no_data"
-            android:layout_gravity="top|center"
-            android:layout_row="5"
-            android:layout_column="1"
-            android:textSize="16dp"
-            android:layout_margin="1dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:layout_row="6"
-            android:layout_column="1"
-            android:layout_margin="10dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/separator2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_row="3"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/separator" />
 
 
-        <!-- Numar infectati in acest moment -->
-        <ImageView
-            android:src="@drawable/unchanged"
-            android:id="@+id/image_active_cases"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_row="7"
-            android:layout_column="1"
-            android:layout_margin="5dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
+            <!-- Se vindeca mai multi decat se imbolnavesc/se imbolnavesc mai multi decat se vindeca -->
+            <ImageView
+                android:src="@drawable/heal"
+                android:id="@+id/image_heal_infection_trend"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/msg_active_cases"
-            android:text="@string/no_data"
-            android:layout_gravity="top|center"
-            android:layout_row="8"
-            android:layout_column="1"
-            android:textSize="16dp"
-            android:layout_margin="10dp"
-            android:gravity="center" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/msg_heal_infection_trend"
+                android:text="@string/no_data"
+                android:layout_gravity="top|center"
+                android:layout_row="5"
+                android:layout_column="1"
+                android:textSize="16dp"
+                android:layout_margin="1dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:layout_row="9"
-            android:layout_column="1"
-            android:layout_margin="5dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/separator3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_row="6"
+                android:layout_column="1"
+                android:layout_margin="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/separator2" />
 
-        <!-- Procentaj forme grave si decese la numarul de infectati -->
-        <ImageView
-            android:src="@drawable/unchanged"
-            android:id="@+id/image_danger_percentage"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_row="10"
-            android:layout_column="1"
-            android:layout_margin="5dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/msg_danger_percentage"
-            android:text="@string/no_data"
-            android:layout_gravity="top|center"
-            android:layout_row="11"
-            android:layout_column="1"
-            android:textSize="16dp"
-            android:layout_margin="10dp"
-            android:gravity="center" />
+            <!-- Numar infectati in acest moment -->
+            <ImageView
+                android:src="@drawable/unchanged"
+                android:id="@+id/image_active_cases"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_row="7"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
 
-    </GridLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/msg_active_cases"
+                android:text="@string/no_data"
+                android:layout_gravity="top|center"
+                android:layout_row="8"
+                android:layout_column="1"
+                android:textSize="16dp"
+                android:layout_margin="10dp"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_row="9"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/separator3" />
+
+            <!-- Procentaj forme grave si decese la numarul de infectati -->
+            <ImageView
+                android:src="@drawable/unchanged"
+                android:id="@+id/image_danger_percentage"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_row="10"
+                android:layout_column="1"
+                android:layout_margin="5dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/msg_danger_percentage"
+                android:text="@string/no_data"
+                android:layout_gravity="top|center"
+                android:layout_row="11"
+                android:layout_column="1"
+                android:textSize="16dp"
+                android:layout_margin="10dp"
+                android:gravity="center" />
+
+        </GridLayout>
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
