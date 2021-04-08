@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_settings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar_settings"
+        app:title="@string/settings_activity_title"
+        android:minHeight="?attr/actionBarSize"  
+        android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
+        android:background="@color/colorPrimary"
+    />
+
+
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:id="@+id/subcontainer_settings" 
+        android:visibility="visible">
+    
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:id="@+id/grid_layout_settings"
+            >
+
+            <TextView
+                android:text="Date afisate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="16dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:id="@+id/textView1"/>
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:showText="true"
+                android:textSize="18dp"
+                android:text="Situatie infectari"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:id="@+id/switch_show_infection_trend"
+                android:switchPadding="10dp"
+                android:splitTrack="false" />
+
+            <Switch
+                android:id="@+id/switch_show_heal_infection_trend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Comparatie vindecari-infectari"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_active_cases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Cazuri active"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_death_percentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Sanse de deces/forma severa"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_today_infections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Numar Infectari (ziua curenta)"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_today_healed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Numar vindecari (ziua curenta)"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_today_deaths"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Numar decese (ziua curenta)"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_immunized_percentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Procentaj imunizati"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_vaccination_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Rata de vaccinare"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_incidence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Rata de incidenta"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_death_trend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Situatie decese"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_proj_immunization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Estimare 70% imunizati"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_proj_vaccination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Estimare 70% vaccinati"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_proj_immunization_half"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Estimare jumatate imunizati"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_proj_vaccination_half"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Estimare jumatate vaccinati"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_proj_immunization_quarter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Estimare un sfert imunizati"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_proj_vaccination_quarter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Estimare un sfert vaccinati"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <Switch
+                android:id="@+id/switch_show_vaccinated_percentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Procent vaccinati"
+                android:layout_gravity="left|start" 
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+                android:enabled="false"
+             />
+
+            
+
+
+            <!--  NOTIFICATIONS  -->
+
+            <TextView
+                android:text="Notificari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:textSize="16dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:id="@+id/textView4" />
+            
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_notif_today_infections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Numarul de infectari"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_notif_today_healed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="18dp"
+                android:text="Numarul de vindecari"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+            
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_notif_incidence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:textSize="18dp"
+                android:text="Incidenta in Bucuresti"
+                app:switchPadding="10dp" 
+                android:showText="true"
+                android:textOff=" "
+                android:textOn=" "
+                android:thumbTextPadding="10dp"
+                android:splitTrack="false"
+             />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

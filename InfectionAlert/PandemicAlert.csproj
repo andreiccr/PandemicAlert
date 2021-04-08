@@ -74,6 +74,8 @@
     <Compile Include="ExtensiveDataActivity.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="Models\Vaccines.cs" />
+    <Compile Include="Preferences.cs" />
+    <Compile Include="SettingsActivity.cs" />
     <Compile Include="ViewUpdater.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Models\CovidData.cs" />
@@ -180,6 +182,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\baseline_notes_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_settings.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\divider.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

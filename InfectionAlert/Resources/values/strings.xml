@@ -4,5 +4,7 @@
     <string name="nav_title_status">Situație Actuală</string>
     <string name="nav_title_data">Alte Date</string>
   
+    <string name="settings_activity_title">Setari</string>
+  
     <string name="no_data">Nu sunt date</string>
 </resources>
