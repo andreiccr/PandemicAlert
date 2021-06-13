@@ -226,7 +226,7 @@ namespace PandemicAlert
                     break;
 
                 case Resource.Id.menu_settings:
-                    Toast.MakeText(this, "Debug: Meniu setari", ToastLength.Long).Show();
+                    Toast.MakeText(this, "Versiunea 0.1 / CIUCUR", ToastLength.Long).Show();
                     break;
 
             }
